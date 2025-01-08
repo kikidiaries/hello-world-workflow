@@ -1,0 +1,26 @@
+name: Hello World Workflow
+
+on:
+  push:
+    branches:
+      - main  # Déclenchement lors d'un push sur la branche principale.
+  pull_request:
+    branches:
+      - main  # Déclenchement lors de la création d'une pull request sur la branche principale.
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest  # Le job sera exécuté sur une machine virtuelle Ubuntu.
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2  # Cette action permet de récupérer les fichiers du dépôt.
+
+    - name: Installer les dépendances et vérifier le code avec npm
+      run: |
+        npm install      # Installe les dépendances du projet.
+        npm run lint     # Exécute eslint pour vérifier la qualité du code.
+
+    - name: Afficher Hello World
+      run: echo "Hello World"  # Affiche "Hello World" dans les logs.
+
